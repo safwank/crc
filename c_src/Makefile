@@ -103,8 +103,6 @@ endif
 CFLAGS += -I"$(ERTS_INCLUDE_DIR)" -I"$(ERL_INTERFACE_INCLUDE_DIR)"
 CXXFLAGS += -I"$(ERTS_INCLUDE_DIR)" -I"$(ERL_INTERFACE_INCLUDE_DIR)"
 
-LDLIBS += -L"$(ERL_INTERFACE_LIB_DIR)" -lerl_interface -lei
-
 # Verbosity.
 
 V ?= 0
@@ -157,7 +155,7 @@ test-build:: $(C_SRC_ENV) $(C_SRC_NIF_FILE)
 
 $(C_SRC_NIF_FILE): $(PREFIX) $(BUILD) $(NIF_OBJECTS)
 	$(link_verbose) $(CC) $(NIF_OBJECTS) \
-		$(LDFLAGS) -shared $(LDLIBS) \
+		$(LDFLAGS) -shared \
 		-o $(C_SRC_NIF_FILE)
 
 $(BUILD)/%.o: $(C_SRC_DIR)/nif/%.c
